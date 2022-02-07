@@ -10,7 +10,6 @@ public class WeatherRequest : MonoBehaviour
 
     private void Start()
     {
-
         StartCoroutine(MakeNetworkRequest());
 
         IEnumerator MakeNetworkRequest()
@@ -18,14 +17,18 @@ public class WeatherRequest : MonoBehaviour
             var request = UnityWebRequest.Get(getURL);
             yield return request.SendWebRequest();
 
-            if (request.result == UnityWebRequest.Result.ProtocolError)
+
+            if (request.result == UnityWebRequest.Result.ProtocolError || request.result == UnityWebRequest.Result.ConnectionError)
             {
-                Debug.Log(request.error);
+                Debug.Log(request?.error);
             }
             else
             {
                 var weather = JsonConvert.DeserializeObject<WeatherResponse>(request.downloadHandler.text);
-                Debug.Log(weather.current.temp_c);
+                foreach (var hour in weather.forecast.forecastday[0].hour)
+                {
+                    Debug.Log(hour.temp_c);
+                }
             }
         }
     }
