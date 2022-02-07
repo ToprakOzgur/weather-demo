@@ -6,8 +6,6 @@ using UnityEngine.Networking;
 
 public class WeatherRequest : MonoBehaviour
 {
-    const string getURL = "http://api.weatherapi.com/v1/forecast.json?key=898147f83a734b7dbaa95705211612&q=Berlin&days=3&aqi=no&alerts=no";
-
     private void Start()
     {
         StartCoroutine(MakeNetworkRequest());
@@ -15,9 +13,8 @@ public class WeatherRequest : MonoBehaviour
 
     IEnumerator MakeNetworkRequest()
     {
-        var request = UnityWebRequest.Get(getURL);
+        var request = UnityWebRequest.Get(Constants.getURL);
         yield return request.SendWebRequest();
-
 
         if (request.result == UnityWebRequest.Result.ProtocolError || request.result == UnityWebRequest.Result.ConnectionError)
         {

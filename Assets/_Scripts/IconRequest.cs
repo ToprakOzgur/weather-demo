@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 public class IconRequest : MonoBehaviour
 {
-    public Image icon;
+    [SerializeField] private Image icon;
 
     public void DownloadIcon(string url)
     {

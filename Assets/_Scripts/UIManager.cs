@@ -5,8 +5,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    public WeatherView weatherViewPrefab;
-    public GameObject listView;
+    [SerializeField] private WeatherView weatherViewPrefab;
+    [SerializeField] private GameObject listView;
 
     private void Awake()
     {
